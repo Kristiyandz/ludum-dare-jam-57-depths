@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://mi0qvcm58vbp"]
+
+[ext_resource type="Texture2D" uid="uid://dmrttfdpyptly" path="res://assets/salvage.png" id="1_36unc"]
+
+[node name="AlienSalvage" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_36unc")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-13, -8, -8, -11, 14, -11, 14, 7, 10, 11, -13, 11)

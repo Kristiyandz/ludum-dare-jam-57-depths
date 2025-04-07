@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ebk1r06ukrd5"]
+
+[ext_resource type="Texture2D" uid="uid://bcaa21hol6ekq" path="res://assets/scene4.png" id="1_1wrmo"]
+
+[node name="LayerFour" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 321.0
+offset_bottom = 179.0
+color = Color(0.106119, 0.523946, 0.712433, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1wrmo")

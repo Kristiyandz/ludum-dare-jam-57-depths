@@ -1,0 +1,143 @@
+[gd_scene load_steps=14 format=3 uid="uid://dvkvm5mll8b4i"]
+
+[ext_resource type="Script" uid="uid://dkprw03rdjvbp" path="res://scripts/submarine.gd" id="1_gua2t"]
+[ext_resource type="Texture2D" uid="uid://cl2xiwp3423rj" path="res://assets/submarine-Sheet.png" id="2_r3h5y"]
+[ext_resource type="AudioStream" uid="uid://brcnhx5ws68qc" path="res://assets/submarine-sonar.wav" id="3_cjhfg"]
+[ext_resource type="AudioStream" uid="uid://06a8ya7jrq6p" path="res://assets/submarine-01.wav" id="4_m734x"]
+[ext_resource type="Texture2D" uid="uid://doumpvfiu8ytn" path="res://assets/underwater-explosion-Sheet.png" id="5_ubaeb"]
+[ext_resource type="AudioStream" uid="uid://5hcbs5s3sel5" path="res://assets/undeerwater_explosion.wav" id="6_t215d"]
+[ext_resource type="AudioStream" uid="uid://cksrti7u3hrmf" path="res://assets/collect.wav" id="7_ekkh5"]
+
+[sub_resource type="Animation" id="Animation_cjhfg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_r3h5y"]
+resource_name = "moving"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m734x"]
+_data = {
+&"RESET": SubResource("Animation_cjhfg"),
+&"moving": SubResource("Animation_r3h5y")
+}
+
+[sub_resource type="Animation" id="Animation_ubaeb"]
+resource_name = "hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_t215d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t215d"]
+_data = {
+&"RESET": SubResource("Animation_t215d"),
+&"hit": SubResource("Animation_ubaeb")
+}
+
+[node name="Submarine" type="CharacterBody2D"]
+collision_mask = 127
+motion_mode = 1
+wall_min_slide_angle = 0.637045
+script = ExtResource("1_gua2t")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-13, -6, -9, -6, -9, -7, -7, -7, -7, -9, -7, -13, -3, -13, -2, -11, 1, -10, 2, -9, 2, -7, 5, -7, 5, -8, 6, -9, 7, -9, 8, -8, 8, -5, 10, -3, 11, -5, 13, -5, 13, 0, 13, 2, 11, 2, 10, 0, 9, 0, 9, 1, 8, 1, 8, 5, 7, 6, 6, 6, 3, 3, -12, 3, -15, 0, -15, -3)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="SubmarineArea2D" type="Area2D" parent="."]
+position = Vector2(0, 1)
+collision_mask = 247
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SubmarineArea2D"]
+polygon = PackedVector2Array(-13, -7, -9, -7, -9, -8, -7, -8, -7, -14, -3, -14, -2, -12, 1, -11, 2, -10, 2, -8, 5, -8, 5, -9, 6, -10, 7, -10, 8, -9, 8, -6, 10, -4, 11, -6, 13, -6, 13, 1, 11, 1, 10, -1, 9, -1, 9, 0, 8, 0, 8, 4, 7, 5, 6, 5, 3, 2, -12, 2, -15, -1, -15, -4)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+texture = ExtResource("2_r3h5y")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_m734x")
+}
+autoplay = "moving"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_cjhfg")
+volume_db = -20.0
+autoplay = true
+playback_type = 1
+
+[node name="PropellerSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_m734x")
+volume_db = -13.0
+
+[node name="HitEffect" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_ubaeb")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HitEffect"]
+libraries = {
+&"": SubResource("AnimationLibrary_t215d")
+}
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_t215d")
+
+[node name="ColelctSavlageSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ekkh5")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="SubmarineArea2D" to="." method="_on_submarine_area_2d_area_entered"]

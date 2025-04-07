@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bermdb0w5108o"]
+
+[ext_resource type="Script" uid="uid://bl3hkcudidoe1" path="res://scripts/win_condition_check_trigger.gd" id="1_70ykk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0t47u"]
+size = Vector2(336, 4)
+
+[node name="WinConditionCheckTrigger" type="Area2D"]
+collision_layer = 64
+script = ExtResource("1_70ykk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(158, 0)
+shape = SubResource("RectangleShape2D_0t47u")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

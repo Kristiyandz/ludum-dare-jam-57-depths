@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbw0sdd1e48am"]
+
+[ext_resource type="Script" uid="uid://8afusehnpvkj" path="res://scripts/game_over_screen.gd" id="1_iwahs"]
+[ext_resource type="Texture2D" uid="uid://ut7lstxqu6c4" path="res://assets/scene10.png" id="2_61w2s"]
+
+[node name="GameOverScreen" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+script = ExtResource("1_iwahs")
+
+[node name="GameOverLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 23.0
+offset_right = 199.0
+offset_bottom = 46.0
+text = "You Died"
+
+[node name="EscapeToMainMenuLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 60.0
+offset_right = 295.0
+offset_bottom = 135.0
+text = "press Space to try again
+
+press Esc to return to main menu"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(161, 91)
+texture = ExtResource("2_61w2s")
+metadata/_edit_lock_ = true

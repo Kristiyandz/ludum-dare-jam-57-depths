@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bodmxfk2s46yg"]
+
+[ext_resource type="Texture2D" uid="uid://bxccy12e2btcu" path="res://assets/bomb.png" id="1_4kkau"]
+[ext_resource type="Script" uid="uid://c3ym2ok6lieaa" path="res://scripts/bomb.gd" id="1_vpdcx"]
+
+[node name="Bomb" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_vpdcx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 3)
+scale = Vector2(1.59375, 1.6875)
+texture = ExtResource("1_4kkau")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-15, -16, -2, -16, -2, -22, 3, -22, 3, -16, 17, -16, 17, -10, 15, -7, 20, -2, 22, 0, 22, 1, 20, 3, 17, 3, 17, 5, 14, 10, 14, 13, 15, 13, 15, 17, 14, 18, 10, 18, 8, 15, 6, 15, 6, 16, 1, 18, -5, 17, -5, 15, -8, 15, -10, 18, -13, 18, -15, 16, -15, 13, -13, 11, -13, 8, -15, 8, -15, 5, -20, 3, -21, 1, -21, 0, -20, -2, -17, -2, -15, -7, -17, -11, -17, -14)

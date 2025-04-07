@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1k3tcmn3fgg4"]
+
+[ext_resource type="Script" uid="uid://dwi87oxljdvro" path="res://scripts/mine_trigger.gd" id="1_wiwtd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlc0e"]
+size = Vector2(337, 4)
+
+[node name="MineTrigger" type="Area2D"]
+collision_layer = 16
+script = ExtResource("1_wiwtd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(158.5, 0)
+shape = SubResource("RectangleShape2D_nlc0e")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

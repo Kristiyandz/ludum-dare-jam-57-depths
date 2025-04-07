@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://ijnb138oer8f"]
+
+[ext_resource type="Script" uid="uid://clvttl4v1c4p0" path="res://scripts/alien_fish.gd" id="1_fn6mu"]
+[ext_resource type="Texture2D" uid="uid://5i1hlem2slua" path="res://assets/monster-updated-Sheet.png" id="2_yu0jv"]
+[ext_resource type="AudioStream" uid="uid://do3hkb776jmkv" path="res://assets/creature_roar.wav" id="3_omnk5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1b24"]
+size = Vector2(318, 38)
+
+[sub_resource type="Animation" id="Animation_omnk5"]
+length = 0.6
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_yu0jv"]
+resource_name = "alien_attack"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o7uhl"]
+_data = {
+&"RESET": SubResource("Animation_omnk5"),
+&"alien_attack": SubResource("Animation_yu0jv")
+}
+
+[node name="AlienFish" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_fn6mu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(160, 19)
+shape = SubResource("RectangleShape2D_w1b24")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(153, 31)
+scale = Vector2(1.20625, 1.4)
+texture = ExtResource("2_yu0jv")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_o7uhl")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_omnk5")
+volume_db = -10.0

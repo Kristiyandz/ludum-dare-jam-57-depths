@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg8d0qv523wcw"]
+
+[ext_resource type="Script" uid="uid://de161cla0q7qo" path="res://scripts/mine.gd" id="1_kqr42"]
+[ext_resource type="Texture2D" uid="uid://dc1e817vgmtra" path="res://assets/mine.png" id="2_yym1a"]
+
+[node name="Mine" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_kqr42")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-2.38419e-07, 0)
+scale = Vector2(1.3, 1.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("2_yym1a")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-9, -10, 0, -11, 10, -10, 11, -3, 14, -1, 11, 2, 9, 6, 10, 9, 8, 11, 5, 9, 1, 11, -3, 9, -6, 10, -9, 10, -9, 8, -9, 2, -13, 0, -13, -1, -12, -2, -10, -3, -9, -5, -9, -7, -10, -7, -10, -9)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

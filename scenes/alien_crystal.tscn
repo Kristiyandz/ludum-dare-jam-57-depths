@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsgjj4ymae0mt"]
+
+[ext_resource type="Script" uid="uid://sm35uhq56jcu" path="res://scripts/alien_ship.gd" id="1_o6x5a"]
+[ext_resource type="Texture2D" uid="uid://covc7s3iaqqrr" path="res://assets/crystal.png" id="2_1r04w"]
+[ext_resource type="AudioStream" uid="uid://cksrti7u3hrmf" path="res://assets/collect.wav" id="3_f64we"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ttvhw"]
+size = Vector2(35, 48.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o6x5a"]
+font_size = 8
+
+[node name="AlientCrystal" type="Area2D" node_paths=PackedStringArray("collect_prompt")]
+collision_layer = 8
+script = ExtResource("1_o6x5a")
+collect_prompt = NodePath("Label")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -5.75)
+shape = SubResource("RectangleShape2D_ttvhw")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -5.0
+offset_top = -19.0
+offset_right = 6.0
+offset_bottom = -7.0
+text = "(C)"
+label_settings = SubResource("LabelSettings_o6x5a")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, 5)
+scale = Vector2(0.578125, 0.546875)
+texture = ExtResource("2_1r04w")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_f64we")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,0 +1,99 @@
+[gd_scene load_steps=4 format=3 uid="uid://colnb8degpsbb"]
+
+[ext_resource type="Script" uid="uid://pqvsjl017jik" path="res://scripts/win_screen.gd" id="1_wv5lq"]
+[ext_resource type="Texture2D" uid="uid://bwlie0rqg2b40" path="res://assets/start-menu.png" id="2_erk2x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wv5lq"]
+font_size = 9
+
+[node name="WinScreen" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.305882, 0.00392157, 0.92549, 0)
+script = ExtResource("1_wv5lq")
+
+[node name="WinMessage" type="Label" parent="."]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 14.0
+offset_right = 213.0
+offset_bottom = 37.0
+text = "Dive complete"
+
+[node name="NewDiveButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 217.0
+offset_top = 140.0
+offset_right = 298.0
+offset_bottom = 171.0
+text = "New Dive"
+
+[node name="BackToMainMenuButton" type="Button" parent="."]
+z_index = 2
+layout_mode = 0
+offset_left = 10.0
+offset_top = 141.0
+offset_right = 168.0
+offset_bottom = 172.0
+text = "Back to main menu"
+
+[node name="TimeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 66.0
+offset_right = 150.0
+offset_bottom = 89.0
+text = "Time:          0"
+
+[node name="SalvageLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 99.0
+offset_right = 141.0
+offset_bottom = 122.0
+text = "Salvage:     0"
+
+[node name="CurrentLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 37.0
+offset_right = 79.0
+offset_bottom = 52.0
+text = "Current"
+label_settings = SubResource("LabelSettings_wv5lq")
+
+[node name="BestLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 234.0
+offset_top = 42.0
+offset_right = 257.0
+offset_bottom = 55.0
+text = "Best"
+label_settings = SubResource("LabelSettings_wv5lq")
+
+[node name="BestTimeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 235.0
+offset_top = 65.0
+offset_right = 275.0
+offset_bottom = 88.0
+text = "0"
+
+[node name="BestSalvageLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 236.0
+offset_top = 96.0
+offset_right = 276.0
+offset_bottom = 119.0
+text = "0"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(161, 91)
+texture = ExtResource("2_erk2x")
+
+[connection signal="pressed" from="NewDiveButton" to="." method="_on_new_dive_button_pressed"]
+[connection signal="pressed" from="BackToMainMenuButton" to="." method="_on_back_to_main_menu_button_pressed"]
